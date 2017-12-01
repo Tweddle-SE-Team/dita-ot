@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import static org.dita.dost.util.Constants.ANT_TEMP_DIR;
+import static org.dita.dost.util.URLUtils.clean;
 import static org.dita.dost.util.URLUtils.toFile;
 import static org.dita.dost.util.URLUtils.toURI;
 
@@ -69,7 +70,7 @@ public class JobMapper implements FileNameMapper {
 
     @Override
     public String[] mapFileName(String sourceFileName) {
-        final URI uri = toURI(sourceFileName);
+        final URI uri = toURI(clean(sourceFileName, false));
         Job.FileInfo fi = job.getFileInfo(uri);
         if (fi == null) {
             fi = job.getFileInfo(job.getInputDir().resolve(uri));

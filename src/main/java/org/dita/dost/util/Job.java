@@ -612,10 +612,10 @@ public final class Job {
         
         FileInfo(final URI src, final URI uri, final File file) {
             if (uri == null && file == null) throw new IllegalArgumentException(new NullPointerException());
-            this.src = src;
-            this.uri = uri != null ? uri : toURI(file);
+            this.src = src != null ? toURI(URLUtils.clean(src.toString(), false)) : null;
+            this.uri = uri != null ? URI.create(URLUtils.clean(uri.toString(), false)) : toURI(file);
             this.file = uri != null ? toFile(uri) : file;
-            this.result = src;
+            this.result = this.src;
         }
         FileInfo(final URI uri) {
             if (uri == null) throw new IllegalArgumentException(new NullPointerException());

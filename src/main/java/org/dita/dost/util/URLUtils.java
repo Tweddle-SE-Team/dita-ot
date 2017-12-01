@@ -465,7 +465,7 @@ public final class URLUtils {
             return null;
         }
         if (file.isAbsolute()) {
-            return file.toURI();
+            return URI.create(clean(file.toURI().toString(), false));
         } else {
             try {
                 return new URI(clean(file.getPath().replace(WINDOWS_SEPARATOR, URI_SEPARATOR).trim(), false));
