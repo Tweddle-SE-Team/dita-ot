@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
 /**
@@ -308,7 +309,7 @@ public final class URLUtils {
         gAfterEscaping1[0x7f] = '7';
         gAfterEscaping2[0x7f] = 'F';
         final char[] escChs = {' ', '<', '>',
-                //'#',
+                '#',
                 //'%',
                 '"', '{', '}',
                 //'?',
@@ -444,7 +445,7 @@ public final class URLUtils {
         }
         String f;
         try {
-            f = URLDecoder.decode(filename, UTF8);
+            f = URLDecoder.decode(filename.replaceAll("\\+", URLEncoder.encode("+", UTF8)), UTF8);
         } catch (final UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
